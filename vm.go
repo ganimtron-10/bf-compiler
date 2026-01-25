@@ -53,9 +53,11 @@ func Execute(program []Instruction) (string, error) {
 			}
 		case OPJmpBwd:
 			pc = operand
-			continue
+			continue // if we dont continue we go to instruction after than [
+		case OPClear:
+			memory[ptr] = 0
 		default:
-			return "", ErrSyntaxError
+			return "", ErrUnmatchedBracket
 		}
 
 		pc++
